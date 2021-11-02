@@ -6,10 +6,11 @@ Stock application with CI/CD pipeline
 
 ### Features
 
- - Simple login screen
- - User registration
- - An endpoint secured with `Basic` authentification layer
- - Persistence layer for storing users in database
+ - Get all stocks
+ - Get stock by id
+ - Update Stock
+ - Add stock
+ - Delete stock
  
 ### Endpoints
 
