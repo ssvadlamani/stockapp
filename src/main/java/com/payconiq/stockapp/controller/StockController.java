@@ -33,6 +33,13 @@ public class StockController {
 	@Autowired
 	private StockService stockService;
 
+	/**
+	 * Get all Stocks with pagination
+	 * @param pageNo
+	 * @param pageSize
+	 * @param sortBy
+	 * @return
+	 */
 	@RequestMapping(value = "/stocks", method = RequestMethod.GET)
 	ResponseEntity<JsonResponse> getAllStocks(@RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "12") int pageSize,
@@ -44,6 +51,11 @@ public class StockController {
 
 	}
 
+	/**
+	 * Get Stock by Id
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/stocks/{id}", method = RequestMethod.GET)
 	public ResponseEntity<JsonResponse<Stock>> getStock(@PathVariable("id") Long id) {
 		LOGGER.info("BEGIN GET STOCK BY ID : "+id);
@@ -52,6 +64,11 @@ public class StockController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(Utils.buildResponse(stock, null, null));
 	}
 
+	/**
+	 *  Post a stock
+	 * @param stock
+	 * @return
+	 */
 	@RequestMapping(value = "/stocks", method = RequestMethod.POST)
 	public ResponseEntity<JsonResponse> addStock(@RequestBody Stock stock) {
 		LOGGER.info("BEGIN POST STOCK ");
@@ -60,6 +77,11 @@ public class StockController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(Utils.buildResponse(savedStock, null, null));
 	}
 
+	/**
+	 * Delete Stock by id
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/stocks", method = RequestMethod.DELETE)
 	public ResponseEntity<JsonResponse> deleteStock(@RequestParam(value = "id") Long id) {
 		LOGGER.info("BEGIN DELETE STOCK BY ID : "+id);
@@ -68,12 +90,18 @@ public class StockController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(Utils.buildResponse(status, null, null));
 	}
 
+	/**
+	 *  Update Stock
+	 * @param id
+	 * @param fields
+	 * @return
+	 */
 	@RequestMapping(value = "/stocks/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<JsonResponse> updateStock(@PathVariable("id") Long id,
 			@RequestBody Map<Object, Object> fields) {
 		LOGGER.info("BEGIN UPDATE STOCK ");
 		Stock updatedStock = stockService.updateStock(id, fields);
-		LOGGER.info("END UPDATE STOCK ");
+		LOGGER.info("E UPDATE STOCK ");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(Utils.buildResponse(updatedStock, null, null));
 	}
 	
